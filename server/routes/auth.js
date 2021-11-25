@@ -11,7 +11,7 @@ const User = require('../models/User')
 //@desc Register
 //@access Public
 router.post('/register', async(req, res)=>{
-    const {username, password, email, ngaysinh, gioitinh, diachi}= req.body
+    const {username, password, email, ngaysinh, gioitinh, diachi, anh}= req.body
     //simple
     if(!username || !password || !email)
     return res.status(400).json({seccess: false, message:'Chưa có tên hoặc mật khẩu hoặc email'})
@@ -22,7 +22,7 @@ router.post('/register', async(req, res)=>{
         return res.status(400).json({seccess: false, message:'Tên người dùng đã được sử dụng'})
         //all good
         const hashedPassword = await argon2.hash(password)
-        const newUser = new User({username, password: hashedPassword, email, ngaysinh, gioitinh, diachi })
+        const newUser = new User({username, password: hashedPassword, email, ngaysinh, gioitinh, diachi, anh })
         await newUser.save()
         //return token
         const accessToken = jwt.sign({userId: newUser._id}, process.env.ACCESS_TOKEN_SECRET)
@@ -48,13 +48,13 @@ router.post('/login', async(req, res)=>{
             if(!user)
             return res
                 .status(400)
-                .json({success: false, message:'Thiếu tên'})
+                .json({success: false, message:'Tên đăng nhập hoặc mật khẩu chưa đúng'})
             //Username found
             const passwordValid = await argon2.verify(user.password, password)
             if(!passwordValid)
             return res
                 .status(400)
-                .json({success: false, message:'Thiếu mật khẩu'})
+                .json({success: false, message:'Tên đăng nhập hoặc mật khẩu chưa đúng'})
             //all good
             //return token
             const accessToken = jwt.sign(

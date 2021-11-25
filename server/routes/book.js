@@ -26,6 +26,7 @@ router.post('/', verifyToken, async(req, res)=>{
             })
         await newBook.save()
         res.json({success: true, message:'Nhập thành công', post: newBook})
+        const bookId = newBook._id;
     } catch (error) {
         console.log(error)
         res.status(500).json({success: false, message:'Server hoặc đường truyền lỗi'})

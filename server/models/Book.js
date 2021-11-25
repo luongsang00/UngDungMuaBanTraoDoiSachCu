@@ -21,7 +21,12 @@ const PostSchema =new Schema({
     },
     mota:{
         type: String
+    },
+    anh:{
+        type:String,
+        default: ""
     }
+    
 })
 
 module.exports = mongoose.model('books', PostSchema)

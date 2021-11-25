@@ -29,6 +29,10 @@ const UserSchema = new Schema({
     },
     diachi:{
         type: String
+    },
+    anh:{
+        type: String,
+        default:""
     }
 
 
