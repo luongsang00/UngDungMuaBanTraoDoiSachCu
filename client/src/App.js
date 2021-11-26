@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import AuthContextProvider from './contexts/AuthContext';
 import Dashboard from './views/Dashboard';
 import ProtectedRoute from './components/routing/ProtectedRoute';
+import Cart from './views/Cart';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path='/login' render={props => <Auth {...props} authRoute='login' />}/>
         <Route exact path='/register' render={props => <Auth {...props} authRoute='register' />}/>
         <ProtectedRoute exact path='/dashboard' component={Dashboard}/>
+        <ProtectedRoute exact path='/about' component={Cart}/>
       </Switch>
     </Router>
     </AuthContextProvider>

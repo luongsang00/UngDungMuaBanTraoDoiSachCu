@@ -13,11 +13,11 @@ router.get('/', verifyToken, async (req, res) => {
 	try {
 		const user = await User.findById(req.userId).select('-password -email -diachi -ngaysinh -gioitinh -anh')
 		if (!user)
-			return res.status(400).json({ success: false, message: 'User not found' })
+			return res.status(400).json({ success: false, message: 'Không tìm thấy người dùng' })
 		res.json({ success: true, user })
 	} catch (error) {
 		console.log(error)
-		res.status(500).json({ success: false, message: 'Internal server error' })
+		res.status(500).json({ success: false, message: 'Server hoặc đường truyền lỗi' })
 	}
 })
 

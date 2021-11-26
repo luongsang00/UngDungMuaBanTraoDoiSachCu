@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { Link,useHistory } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 import AlertMessage from '../layout/AlertMessage'
@@ -8,8 +8,6 @@ import AlertMessage from '../layout/AlertMessage'
 const RegisterForm = () => {
 	// Context
 	const { registerUser } = useContext(AuthContext)
-    //router
-    const history = useHistory()
 	// Local state
 	const [RegisterForm, setRegisterForm] = useState({
 		username: '',
@@ -39,11 +37,8 @@ const RegisterForm = () => {
 
 		try {
 			const registerData = await registerUser(RegisterForm)
-			if (registerData.success) 
-            {
-                history.push('/dashboard')
-            }
-            else{
+			if (!registerData.success) 
+           {
 				setAlert({ type: 'danger', message: registerData.message })
 				setTimeout(() => setAlert(null), 5000)
 			}
