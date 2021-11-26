@@ -25,7 +25,7 @@ const UserSchema = new Schema({
     },
     gioitinh:{
         type: String,
-        enum: ['Nam', 'Nu', 'Khac']
+        enum: ['Nam', 'Nu', 'Khac', '']
     },
     diachi:{
         type: String
