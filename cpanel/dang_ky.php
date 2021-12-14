@@ -1,1 +1,0 @@
-<!-- tạo from đăng ký (kiểm tra tài khoản đã tồn tài chưa ở trên database) -->
