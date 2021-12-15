@@ -1,7 +1,8 @@
 <?php
+$filepath= realpath(dirname(__FILE__));
 
-    include_once '../lib/database.php';
-    include_once '../helpers/format.php';
+include_once($filepath.'/../lib/database.php');
+include_once($filepath.'/../helpers/format.php');
 ?>
 
 <?php
@@ -60,42 +61,108 @@
             $result = $this->db->select($query);
             return $result;
         }
-        // public function getcatbyId($id){
-        //     $query = "SELECT * FROM tbl_category where catId = '$id'";
-        //     $result = $this->db->select($query);
-        //     return $result;
-        // }
-        // public function update_category($catName,$id){
-        //     $catName = $this->fm->validation($catName);  
-        //     $catName= mysqli_real_escape_string($this->db->link, $catName);
-        //     $id= mysqli_real_escape_string($this->db->link, $id);
-           
-        //     if(empty($catName)){
-        //         $alert = "<span class='error'>Tên không được để trống</span>";
-        //         return $alert;
-        //     }else{
-        //         $query = "UPDATE tbl_category set catName = '$catName' where catId ='$id'";
-        //         $result = $this->db->update($query);
-        //         if($result){
-        //             $alert="<span class='success'>Cật nhật thành công</span>";
-        //             return $alert;
-        //         }else{
-        //             $alert="<span class='error'>Cật nhật không thành công</span>";
-        //             return $alert;
-        //         }
-        //     }
-        // }
-        // public function del_category($id){
-        //     $query = "DELETE FROM tbl_category where catId = '$id'";
-        //     $result = $this->db->delete($query);
-        //     if($result){
-        //         $alert="<Category class='success'>Xóa thành công</span>";
-        //         return $alert;
-        //     }else{
-        //         $alert="<span class='error'>Xóa không thành công</span>";
-        //         return $alert;
-        //     }
-        // }
+        public function getproductbyId($id){
+            $query = "SELECT * FROM tbl_product where productId = '$id'";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function update_product($data,$files,$id){
+            
+            $productName= mysqli_real_escape_string($this->db->link, $data['productName']);
+            $category= mysqli_real_escape_string($this->db->link, $data['category']);
+            $publishing= mysqli_real_escape_string($this->db->link, $data['publishing']);
+            $product_desc= mysqli_real_escape_string($this->db->link, $data['product_desc']);
+            $price= mysqli_real_escape_string($this->db->link, $data['price']);
+            $type= mysqli_real_escape_string($this->db->link, $data['type']);
+            
+            
+            //kiểm tra hình ảnh và lấy hình ảnh cho vào foder uploads
+            $permited = array('jpn', 'jpeg', 'png','gif');
+            $file_name = $_FILES['image']['name'];
+            $file_size = $_FILES['image']['size'];
+            $file_temp = $_FILES['image']['tmp_name'];
+
+            $div = explode('.', $file_name);
+            $file_ext = strtolower(end($div));
+            $unique_image = substr(md5(time()),0,10).'.'.$file_ext;
+            $uploaded_image = "uploads/".$unique_image;
+
+             if($productName =="" ||$category =="" ||$publishing =="" ||$product_desc ==""||$type=="" ||$price =="" ){
+                $alert = "<span class='error'>Các trường không được rỗng</span>";
+                return $alert;
+            }else{
+                //nếu người dùng chọn ảnh
+                if(!empty($file_name)){
+                    if($file_size>20480){
+                        $alert = "<span class='error'>Kích thước ảnh không vượt quá 2MB!</span>";
+                        return $alert;
+                        
+                    }else if(in_array($file_ext, $permited)===false){
+                        $alert = "<span class='error'>Bạn chỉ có thể up những file:-".implode(', ', $permited)."</span>";
+                        return $alert;   
+                    }
+                    $query = "UPDATE tbl_product set
+                    productName = '$productName', 
+                    catId = '$category', 
+                    publishingId = '$publishing', 
+                    product_desc = '$product_desc', 
+                    price = '$price', 
+                    type = '$type', 
+                    image = '$unique_image'
+                    where productId ='$id'";
+                }else{
+                // nếu người dùng không chọn ảnh
+                $query = "UPDATE tbl_product set
+                
+                productName = '$productName', 
+                    catId = '$category', 
+                    publishingId = '$publishing', 
+                    product_desc = '$product_desc', 
+                    price = '$price', 
+                    type = '$type'
+                    where productId ='$id'";
+                }
+                $result = $this->db->update($query);
+                if($result){
+                    $alert="<span class='success'>Cật nhật thành công</span>";
+                    return $alert;
+                }else{
+                    $alert="<span class='error'>Cật nhật không thành công</span>";
+                    return $alert;
+                }
+            }
+        }
+        public function del_product($id){
+            $query = "DELETE FROM tbl_product where productId = '$id'";
+            $result = $this->db->delete($query);
+            if($result){
+                $alert="<Category class='success'>Xóa thành công</span>";
+                return $alert;
+            }else{
+                $alert="<span class='error'>Xóa không thành công</span>";
+                return $alert;
+            }
+        }
+        //end backend
+        public function getproduct_feathered(){
+            $query = "SELECT * FROM tbl_product where type = '1'";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function getproduct_new(){
+            $query = "SELECT * FROM tbl_product order by productId desc LIMIT 4";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function get_detail($id){
+            $query = "SELECT tbl_product.*, tbl_category.catName, tbl_publishing.publishingName 
+            FROM tbl_product INNER JOIN tbl_category ON tbl_product.catId= tbl_category.catId
+            INNER JOIN tbl_publishing ON tbl_product.publishingId= tbl_publishing.publishingId
+            where tbl_product.productId='$id'";
+            $result = $this->db->select($query);
+            return $result;
+        }
+
     }
     
 ?>

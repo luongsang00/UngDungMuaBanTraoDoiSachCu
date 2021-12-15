@@ -10,10 +10,10 @@
                         
                     </ul>
                 </li>
-                <li><a class="menuitem">Danh mục sách</a>
+                <li><a class="menuitem">Thể loại sách</a>
                     <ul class="submenu">
-                        <li><a href="catadd.php">Thêm danh mục</a> </li>
-                        <li><a href="catlist.php">Danh mục sách</a> </li>
+                        <li><a href="catadd.php">Thêm thể loại</a> </li>
+                        <li><a href="catlist.php">Danh sách thể loại sách</a> </li>
                     </ul>
                 </li>
                 <li><a class="menuitem">Nhà xuất bản</a>
