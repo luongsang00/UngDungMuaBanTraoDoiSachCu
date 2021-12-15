@@ -7,6 +7,11 @@
 		echo "<script>window.location='404.php'</script>";
 	}else{
 	$id=$_GET['proid'];
+	if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit'])){
+		
+		$quantily=$_POST['quantily'];
+		$AddtoCart= $ct->add_to_cart($quantily,$id);
+	}
 }
 ?>
 
@@ -23,7 +28,7 @@
 			?>
 				<div class="cont-desc span_1_of_2">				
 					<div class="grid images_3_of_2">
-						<img src="images/preview-img.jpg" alt="" />
+						<img src="admin/uploads/<?php echo $result_detail['image'] ?>" alt="" />
 					</div>
 					<div class="desc span_3_of_2">
 						<h2><?php echo $result_detail['productName'] ?></h2>
@@ -34,8 +39,8 @@
 							<p>NXB:<span><?php echo $result_detail['publishingName'] ?></span></p>
 						</div>
 						<div class="add-cart">
-							<form action="cart.php" method="post">
-								<input type="number" class="buyfield" name="" value="1"/>
+							<form action="" method="post">
+								<input type="number" class="buyfield" name="quantily" value="1" min="1"/>
 								<input type="submit" class="buysubmit" name="submit" value="Buy Now"/>
 							</form>				
 						</div>
