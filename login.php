@@ -1,6 +1,6 @@
 <?php
 	include 'inc/header.php';
-	include 'inc/slider.php';
+	//include 'inc/slider.php';
 ?>
 
  <div class="main">
@@ -23,23 +23,23 @@
 						<tr>
 						<td>
 							<div>
-							<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" >
+							<input type="text" value="Name" placeholder="Tên..."  >
 							</div>
 							
 							<div>
-							   <input type="text" value="City" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'City';}">
+							   <input type="text" value="City" placeholder="" >
 							</div>
 							
 							<div>
-								<input type="text" value="Zip-Code" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Zip-Code';}">
+								<input type="text" value="Zip-Code" placeholder="">
 							</div>
 							<div>
-								<input type="text" value="E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}">
+								<input type="text" value="E-Mail" placeholder="">
 							</div>
 		    			 </td>
 		    			<td>
 						<div>
-							<input type="text" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}">
+							<input type="text" value="Address" placeholder="">
 						</div>
 		    		<div>
 						<select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">

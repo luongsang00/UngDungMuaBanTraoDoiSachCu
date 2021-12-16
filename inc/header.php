@@ -4,13 +4,15 @@ Session::init();
 ?>
 <?php
 
-include './lib/database.php';
+include_once './lib/database.php';
 include_once './helpers/format.php';
-include_once './classes/user.php';
-include_once './classes/cart.php';
-include_once './classes/category.php';
-include_once './classes/product.php';
-
+// include_once './classes/user.php';
+// include_once './classes/cart.php';
+// include_once './classes/category.php';
+// include_once './classes/product.php';
+spl_autoload_register(function($className){
+	include_once "classes/".$className.".php";
+});
 $db= new Database();
 $fm= new Format();
 $us= new user();
@@ -65,7 +67,18 @@ $product= new product();
 					<div class="cart">
 						<a href="#" title="View my shopping cart" rel="nofollow">
 								<span class="cart_title">Cart</span>
-								<span class="no_product">(empty)</span>
+								<span class="no_product">
+									<?php
+										$check_cart = $ct->check_cart();
+										if($check_cart){
+											$sum=Session::get("sum");
+											$qty=Session::get("qty");
+											echo $sum." ".'đ'.'-'.'Sl: '.$qty;
+										}else{
+											echo '0'.' '.'đ';
+										}
+									?>
+								</span>
 							</a>
 						</div>
 			      </div>
@@ -76,10 +89,10 @@ $product= new product();
  </div>
 <div class="menu">
 	<ul id="dc_mega-menu-orange" class="dc_mm-orange">
-	  <li><a href="index.php">Home</a></li>
-	  <li><a href="products.php">Products</a> </li>
-	  <li><a href="topbrands.php">Publishing Company</a></li>
-	  <li><a href="cart.php">Cart</a></li>
+	  <li><a href="index.php">Trang chủ</a></li>
+	  <li><a href="products.php">Sách</a> </li>
+	  <li><a href="topbrands.php">Nhà xuất bản</a></li>
+	  <li><a href="cart.php">Giỏ hàng</a></li>
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>

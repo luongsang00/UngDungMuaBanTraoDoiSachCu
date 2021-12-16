@@ -1,18 +1,19 @@
 <?php
 	include 'inc/header.php';
-	include 'inc/slider.php';
+	//include 'inc/slider.php';
 ?>
 <?php
 	if(!isset($_GET['proid']) || $_GET['proid']==null){
 		echo "<script>window.location='404.php'</script>";
 	}else{
 	$id=$_GET['proid'];
+	}
 	if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit'])){
 		
 		$quantily=$_POST['quantily'];
 		$AddtoCart= $ct->add_to_cart($quantily,$id);
 	}
-}
+
 ?>
 
  <div class="main">
@@ -42,7 +43,12 @@
 							<form action="" method="post">
 								<input type="number" class="buyfield" name="quantily" value="1" min="1"/>
 								<input type="submit" class="buysubmit" name="submit" value="Buy Now"/>
-							</form>				
+							</form>	
+							<?php
+							if(isset($AddtoCart)){
+								echo '<span style="color:red; font-size:18 px">Sản phẩm đã được thêm vào giỏ hàng</span>';
+							}
+							?>			
 						</div>
 					</div>
 					<div class="product-desc">
@@ -55,10 +61,17 @@
 				}
 			}?>
 				<div class="rightsidebar span_3_of_1">
-					<h2>CATEGORIES</h2>
+					<h2>Thể Loại Sách</h2>
+					<?php 
+					$getall_category=$cat->show_category_frontend();
+					if($getall_category){
+						while($result_allcat=$getall_category->fetch_assoc()){		
+					?>
 					<ul>
-				      <li><a href="productbycat.php">Mobile Phones</a></li>
-				      
+				      <li><a href="productbycat.php?catid=<?php echo $result_allcat['catId'] ?>"><?php echo $result_allcat['catName'] ?></a></li>
+				      <?php
+					  }
+					}?>
     				</ul>
     	
  				</div>

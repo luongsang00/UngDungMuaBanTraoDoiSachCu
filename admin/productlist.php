@@ -24,14 +24,14 @@ if(isset($_GET['productid']) ){
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Book Name</th>
-					<th>Book Price</th>
-					<th>Book Image</th>
-					<th>Category</th>
-					<th>Publishing </th>
-					<th>Description</th>
-					<th>Type</th>
-					<th>Action</th>
+					<th>Tên sách</th>
+					<th>Giá</th>
+					<th>Ảnh</th>
+					<th>Thể loại</th>
+					<th>Nhà xuất bản </th>
+					<th>Mô tả</th>
+					<th>Loại</th>
+					<th>Sửa/Xóa</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -77,6 +77,21 @@ include_once($filepath.'/../helpers/format.php');
                 return $alert;
             }
         }
+        public function show_category_frontend(){
+            $query = "SELECT * FROM tbl_category order by catId desc";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function get_product_by_cat($id){
+            $query = "SELECT * FROM tbl_product Where catId='$id' order by catId desc limit 8";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function get_name_by_cat($id){
+            $query = "SELECT tbl_product.*, tbl_category.catName, tbl_category.catId from tbl_product,tbl_category  Where tbl_product.catId=tbl_category.catId and tbl_product.catId ='$id' limit 1";
+            $result = $this->db->select($query);
+            return $result;
+        }
     }
     
 ?>

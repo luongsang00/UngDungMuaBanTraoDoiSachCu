@@ -162,6 +162,27 @@ include_once($filepath.'/../helpers/format.php');
             $result = $this->db->select($query);
             return $result;
         }
+        
+       public function getLastestKD(){
+        $query = "SELECT * FROM tbl_product Where publishingId='9' order by productId desc LIMIT 1 ";
+        $result = $this->db->select($query);
+        return $result;
+       }
+       public function getLastestVH(){
+        $query = "SELECT * FROM tbl_product Where publishingId='1' order by productId desc LIMIT 1 ";
+        $result = $this->db->select($query);
+        return $result;
+       }
+       public function getLastestTD(){
+        $query = "SELECT * FROM tbl_product Where publishingId='6' order by productId desc LIMIT 1 ";
+        $result = $this->db->select($query);
+        return $result;
+       }
+       public function getLastestBL(){
+        $query = "SELECT * FROM tbl_product Where publishingId='11' order by productId desc LIMIT 1 ";
+        $result = $this->db->select($query);
+        return $result;
+       }
 
     }
     

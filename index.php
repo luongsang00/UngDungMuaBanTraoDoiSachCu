@@ -9,7 +9,7 @@
     <div class="content">
     	<div class="content_top">
     		<div class="heading">
-    		<h3>Feature Products</h3>
+    		<h3>Sách nổi bật</h3>
     		</div>
     		<div class="clear"></div>
     	</div>
@@ -24,7 +24,7 @@
 					 <h2><?php $fm->textShorten($result['productName'],50) ?> </h2>
 					 <p><?php echo $fm->textShorten($result['product_desc'],50)  ?></p>
 					 <p><span class="price"><?php echo $result['price'].' '.'VND' ?></span></p>
-				     <div class="button"><span><a href="detals.php?proid=<?php echo $result['productId']?>" class="details">Details</a></span></div>
+				     <div class="button"><span><a href="detals.php?proid=<?php echo $result['productId']?>" class="details">Chi tiết sách</a></span></div>
 				</div>
 				<?php
 			  }
@@ -34,7 +34,7 @@
 			</div>
 			<div class="content_bottom">
     		<div class="heading">
-    		<h3>New Products</h3>
+    		<h3>Sách mới </h3>
     		</div>
     		<div class="clear"></div>
     	</div>
@@ -49,7 +49,7 @@
 					 <h2><?php echo $fm->textShorten($result_new['productName'],50) ?> </h2>
 					 <p><?php echo $fm->textShorten($result_new['product_desc'],50)  ?></p>
 					 <p><span class="price"><?php echo $result_new['price'].' '.'VND' ?></span></p>
-				     <div class="button"><span><a href="detals.php?proid=<?php echo $result_new['productId']?>" class="details">Details</a></span></div>
+				     <div class="button"><span><a href="detals.php?proid=<?php echo $result_new['productId']?>" class="details">Chi tiết sách</a></span></div>
 				</div>
 				<?php
 			  }
