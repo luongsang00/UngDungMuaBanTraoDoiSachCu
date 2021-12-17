@@ -2112,6 +2112,7 @@ p.terms {
 		padding:3%;
 	}
 /*** About ***/
+
 .grid_1_of_5{ 
 		margin: 0% 0 0% 0%;
 	}	
@@ -2156,6 +2157,7 @@ p.terms {
 		width:77.5%;
     }
     .search_box form input[type="submit"] {
+		
     	width:18.5%;
     }
     .shopping_cart {

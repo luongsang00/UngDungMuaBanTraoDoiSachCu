@@ -18,6 +18,7 @@ $fm= new Format();
 $us= new user();
 $ct= new cart();
 $cat= new category();
+$cs= new customer();
 $product= new product();
 
 
@@ -82,7 +83,25 @@ $product= new product();
 							</a>
 						</div>
 			      </div>
-		   <div class="login"><a href="login.php">Login</a></div>
+
+			<?php
+				if(isset($_GET['customer_id'])){
+					$del_cart=$ct->dell_all_data_cart();
+					Session::destroy();
+				}
+			?>
+
+		   <div class="login">
+			    <?php
+				$login_check=Session::get('customer_login');
+				if($login_check==false){
+					echo '<a href="login.php">Đăng nhập</a></div>';
+				}else{
+					echo '<a href="?customer_id='.Session::get('customer_id').' ">  Đăng xuất</a></div>';
+				}
+		  		?>
+				  
+		   
 		 <div class="clear"></div>
 	 </div>
 	 <div class="clear"></div>
@@ -92,8 +111,36 @@ $product= new product();
 	  <li><a href="index.php">Trang chủ</a></li>
 	  <li><a href="products.php">Sách</a> </li>
 	  <li><a href="topbrands.php">Nhà xuất bản</a></li>
-	  <li><a href="cart.php">Giỏ hàng</a></li>
+	  <?php 
+	  $check_cart = $ct->check_cart();
+	  	if($check_cart==true){
+			echo '<li><a href="cart.php">Giỏ hàng</a></li>';
+		  }else{
+			echo '';
+		  }
+	  ?>
+	  
+	  <?php
+	  	$login_check=Session::get('customer_login');
+		  if($login_check==false){
+			echo '';
+		  }else{
+			echo '<li><a href="profile.php">Tài khoản</a> </li>';
+		  }
+	  ?>
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>
 </div>
+<style>
+	input.grey {
+    font-size: 20px;
+    background: #353333;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: white;
+	}
+	
+</style>
