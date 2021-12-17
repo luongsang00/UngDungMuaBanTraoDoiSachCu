@@ -29,6 +29,7 @@ if(isset($_GET['productid']) ){
 					<th>Ảnh</th>
 					<th>Thể loại</th>
 					<th>Nhà xuất bản </th>
+					<th>Tác giả</th>
 					<th>Mô tả</th>
 					<th>Loại</th>
 					<th>Sửa/Xóa</th>
@@ -51,6 +52,7 @@ if(isset($_GET['productid']) ){
 					<td><img src="uploads/<?php echo $result['image']?>" width="80"></td>
 					<td><?php echo $result['catName'] ?> </td>
 					<td><?php echo $result['publishingName'] ?> </td>
+					<td><?php echo $result['author'] ?> </td>
 					<td><?php echo $fm->textShorten( $result['product_desc'],50 )?> </td>
 
 					<td>

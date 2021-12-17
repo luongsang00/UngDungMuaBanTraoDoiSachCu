@@ -110,7 +110,7 @@ $product= new product();
 	<ul id="dc_mega-menu-orange" class="dc_mm-orange">
 	  <li><a href="index.php">Trang chủ</a></li>
 	  <li><a href="products.php">Sách</a> </li>
-	  <li><a href="topbrands.php">Nhà xuất bản</a></li>
+	  <!-- <li><a href="topbrands.php">Nhà xuất bản</a></li> -->
 	  <?php 
 	  $check_cart = $ct->check_cart();
 	  	if($check_cart==true){
@@ -128,7 +128,7 @@ $product= new product();
 			echo '<li><a href="profile.php">Tài khoản</a> </li>';
 		  }
 	  ?>
-	  <li><a href="contact.php">Contact</a> </li>
+	  <!-- <li><a href="contact.php">Contact</a> </li> -->
 	  <div class="clear"></div>
 	</ul>
 </div>

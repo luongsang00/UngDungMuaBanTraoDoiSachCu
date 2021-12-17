@@ -21,8 +21,11 @@ include_once($filepath.'/../helpers/format.php');
             $category= mysqli_real_escape_string($this->db->link, $data['category']);
             $publishing= mysqli_real_escape_string($this->db->link, $data['publishing']);
             $product_desc= mysqli_real_escape_string($this->db->link, $data['product_desc']);
+            $author= mysqli_real_escape_string($this->db->link, $data['author']);
             $price= mysqli_real_escape_string($this->db->link, $data['price']);
             $type= mysqli_real_escape_string($this->db->link, $data['type']);
+            
+            
             
             
             //kiểm tra hình ảnh và lấy hình ảnh cho vào foder uploads
@@ -36,12 +39,13 @@ include_once($filepath.'/../helpers/format.php');
             $unique_image = substr(md5(time()),0,10).'.'.$file_ext;
             $uploaded_image = "uploads/".$unique_image;
            
-            if($productName =="" ||$category =="" ||$publishing =="" ||$product_desc ==""||$type=="" ||$price =="" ||$file_name==""){
+            if($productName =="" ||$category =="" ||$publishing =="" ||$product_desc ==""||$type=="" ||$price =="" ||$file_name==""||$author==""){
                 $alert = "<span class='error'>Các trường không được rỗng</span>";
                 return $alert;
             }else{
+
                 move_uploaded_file($file_temp,$uploaded_image);
-                $query = "INSERT INTO tbl_product(productName, catId, publishingId, product_desc, price, type, image) VALUES('$productName', '$category', '$publishing','$product_desc','$price','$type','$unique_image')";
+                $query = "INSERT INTO tbl_product(productName, catId, publishingId, product_desc,author, price, type, image) VALUES('$productName', '$category', '$publishing','$product_desc','$author','$price','$type','$unique_image')";
                 $result = $this->db->insert($query);
                 if($result){
                     $alert="<span class='success'>Thêm thành công</span>";
@@ -145,6 +149,7 @@ include_once($filepath.'/../helpers/format.php');
             $category= mysqli_real_escape_string($this->db->link, $data['category']);
             $publishing= mysqli_real_escape_string($this->db->link, $data['publishing']);
             $product_desc= mysqli_real_escape_string($this->db->link, $data['product_desc']);
+            $author= mysqli_real_escape_string($this->db->link, $data['author']);
             $price= mysqli_real_escape_string($this->db->link, $data['price']);
             $type= mysqli_real_escape_string($this->db->link, $data['type']);
             
@@ -160,7 +165,7 @@ include_once($filepath.'/../helpers/format.php');
             $unique_image = substr(md5(time()),0,10).'.'.$file_ext;
             $uploaded_image = "uploads/".$unique_image;
 
-             if($productName =="" ||$category =="" ||$publishing =="" ||$product_desc ==""||$type=="" ||$price =="" ){
+             if($productName =="" ||$category =="" ||$publishing =="" ||$product_desc ==""||$type=="" ||$price =="" ||$author=="" ){
                 $alert = "<span class='error'>Các trường không được rỗng</span>";
                 return $alert;
             }else{
@@ -192,6 +197,7 @@ include_once($filepath.'/../helpers/format.php');
                     catId = '$category', 
                     publishingId = '$publishing', 
                     product_desc = '$product_desc', 
+                    author='$author',
                     price = '$price', 
                     type = '$type'
                     where productId ='$id'";

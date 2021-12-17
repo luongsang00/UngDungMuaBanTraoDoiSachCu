@@ -21,7 +21,7 @@
     	<div class="cartoption">		
 			<div class="cartpage">
 			    <div class="order_page">
-                    <h3>order pagr</h3>
+                    <h3>order page</h3>
                 </div>
 						
 						

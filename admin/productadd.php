@@ -19,7 +19,7 @@
     <div class="box round first grid">
         <h2>Thêm sách</h2>
         <div class="block">               
-         <form action="productadd.php" method="post" enctype="multipart/form-data">
+         <form action="" method="post" enctype="multipart/form-data">
             <table class="form">
             <?php 
                 if(isset($inserProduct))
@@ -28,15 +28,15 @@
                
                 <tr>
                     <td>
-                        <label>Name</label>
+                        <label>Tên sách</label>
                     </td>
                     <td>
-                        <input type="text" name="productName" placeholder="Enter Product Name..." class="medium" />
+                        <input type="text" name="productName" placeholder="Nhập tên sách..." class="medium" />
                     </td>
                 </tr>
 				<tr>
                     <td>
-                        <label>Category</label>
+                        <label>Thể loại</label>
                     </td>
                     <td>
                         <select id="select" name="category">
@@ -59,9 +59,27 @@
                         </select>
                     </td>
                 </tr>
+                
+				
+				 <tr>
+                    <td style="vertical-align: top; padding-top: 9px;">
+                        <label>Mô tả sách</label>
+                    </td>
+                    <td>
+                        <textarea name="product_desc" class="tinymce"></textarea>
+                    </td>
+                </tr>
+				<tr>
+                    <td>
+                        <label>Giá</label>
+                    </td>
+                    <td>
+                        <input type="text" name="price" placeholder="Nhập giá" class="medium" />
+                    </td>
+                </tr>
                 <tr>
                     <td>
-                        <label>Publishing</label>
+                        <label>Nhà xuất bản</label>
                     </td>
                     <td>
                         <select id="select" name="publishing">
@@ -84,27 +102,18 @@
                         </select>
                     </td>
                 </tr>
-				
-				 <tr>
-                    <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Description</label>
+                <tr>
+                    <td>
+                        <label>Tác giả</label>
                     </td>
                     <td>
-                        <textarea name="product_desc" class="tinymce"></textarea>
-                    </td>
-                </tr>
-				<tr>
-                    <td>
-                        <label>Price</label>
-                    </td>
-                    <td>
-                        <input type="text" name="price" placeholder="Enter Price..." class="medium" />
+                        <input type="text" name="author" placeholder="Tác giả..." class="medium" />
                     </td>
                 </tr>
             
                 <tr>
                     <td>
-                        <label>Upload Image</label>
+                        <label>Hình ảnh</label>
                     </td>
                     <td>
                         <input type="file" name="image" />
@@ -112,7 +121,7 @@
                 </tr>
 				<tr>
                     <td>
-                        <label>Product Type</label>
+                        <label>Thuộc tính</label>
                     </td>
 				    <td>
                         <select id="select" name="type">

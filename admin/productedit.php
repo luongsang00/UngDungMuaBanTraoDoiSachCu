@@ -40,7 +40,7 @@
 
                 <tr>
                     <td>
-                        <label>Name</label>
+                        <label>Tên sách</label>
                     </td>
                     <td>
                         <input type="text" name="productName" value="<?php echo $result_product['productName']  ?>" class="medium" />
@@ -48,7 +48,7 @@
                 </tr>
 				<tr>
                     <td>
-                        <label>Category</label>
+                        <label>Thể loại</label>
                     </td>
                     <td>
                         <select id="select" name="category">
@@ -78,9 +78,28 @@
                         </select>
                     </td>
                 </tr>
+                
+				
+				 <tr>
+                    <td style="vertical-align: top; padding-top: 9px;">
+                        <label>Mô tả sách</label>
+                    </td>
+                    <td>
+                        <textarea name="product_desc" class="tinymce" ><?php echo $result_product['product_desc'] ?></textarea>
+                    </td>
+                </tr>
+				<tr>
+                    <td>
+                        <label>Price</label>
+                    </td>
+                    <td>
+                        <input type="text" name="price" value="<?php echo $result_product['price']  ?>" class="medium" />
+                    </td>
+                </tr>
+
                 <tr>
                     <td>
-                        <label>Publishing</label>
+                        <label>Nhà xuất bản</label>
                     </td>
                     <td>
                         <select id="select" name="publishing">
@@ -107,27 +126,19 @@
                         </select>
                     </td>
                 </tr>
-				
-				 <tr>
-                    <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Description</label>
+
+                <tr>
+                    <td>
+                        <label>Tác giả</label>
                     </td>
                     <td>
-                        <textarea name="product_desc" class="tinymce" ><?php echo $result_product['product_desc'] ?></textarea>
-                    </td>
-                </tr>
-				<tr>
-                    <td>
-                        <label>Price</label>
-                    </td>
-                    <td>
-                        <input type="text" name="price" value="<?php echo $result_product['price']  ?>" class="medium" />
+                        <input type="text" name="author" value="<?php echo $result_product['author']  ?>" class="medium" />
                     </td>
                 </tr>
             
                 <tr>
                     <td>
-                        <label>Upload Image</label>
+                        <label>Hình ảnh/label>
                     </td>
                     <td>
                     <img src="uploads/<?php echo $result_product['image']?>" width="120"><br>
@@ -136,11 +147,11 @@
                 </tr>
 				<tr>
                     <td>
-                        <label>Product Type</label>
+                        <label>Thuộc tính</label>
                     </td>
 				    <td>
                         <select id="select" name="type">
-                            <option>Select Type</option>
+                            <option>Chọn thuộc tính</option>
                             <?php
                             if ($result_product['type']=0)
                             {?>

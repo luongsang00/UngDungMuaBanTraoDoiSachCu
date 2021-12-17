@@ -33,7 +33,8 @@
         <div class="wrapper_method">
             <h3 class="payment">Chọn phương thức thanh toán</h3>
             <a  href="offlinepayment.php">Trực tiếp</a>
-            <a  href="onlinepayment.php">Chuyển khoản</a>
+            <a  href="onlinepayment.php">Chuyển khoản</a><br><br>
+            <a style="background: grey;" href="cart.php">Trở lại giỏ hàng</a>
         </div>
         
     </div>

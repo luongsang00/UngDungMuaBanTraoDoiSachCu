@@ -24,6 +24,7 @@
 					 <h2><?php $fm->textShorten($result['productName'],50) ?> </h2>
 					 <p><?php echo $fm->textShorten($result['product_desc'],50)  ?></p>
 					 <p><span class="price"><?php echo $result['price'].' '.'VND' ?></span></p>
+					 <p><span class="author">Tác giả: <?php echo $result['author'] ?></span></p>
 				     <div class="button"><span><a href="detals.php?proid=<?php echo $result['productId']?>" class="details">Chi tiết sách</a></span></div>
 				</div>
 				<?php
@@ -65,3 +66,8 @@
 	include 'inc/footer.php';
 
 ?>
+<style>
+	span.author {
+    font-size: 9px;
+}
+</style>
