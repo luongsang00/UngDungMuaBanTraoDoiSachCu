@@ -21,6 +21,19 @@
     <div class="content">
     	<div class="section group">
             <h3 class="success">Đặt sách thành công</h3>
+			<?php
+			$customer_id = Session::get('customer_id');
+			$get_amount=$ct->getAmountPrice($customer_id);
+			if($get_amount){
+				$amount=0;
+				while($result=$get_amount->fetch_assoc()){
+					$price=$result['price'];
+					$amount+=$price;
+				}
+			}
+			?>
+			<p class="order">Số tiền bạn đã mua sách ở website: <?php echo $amount ?> VND</p>
+			<p class="order">Chúng tôi sẽ liên lạc với bạn sớm nhất có thể. Xem lại đơn hàng  <a href="orderdetails.php">tại đây</a></p>
         
  		</div>
  	</div>
@@ -37,4 +50,9 @@ include 'inc/footer.php';
         text-align: center;
         color:green;
     }
+	.order{
+		text-align: center;
+		padding: 8px;
+		font-size: 18px;
+	}
 </style>

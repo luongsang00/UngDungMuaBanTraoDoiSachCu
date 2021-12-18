@@ -50,6 +50,7 @@
 					 <h2><?php echo $fm->textShorten($result_new['productName'],50) ?> </h2>
 					 <p><?php echo $fm->textShorten($result_new['product_desc'],50)  ?></p>
 					 <p><span class="price"><?php echo $result_new['price'].' '.'VND' ?></span></p>
+					 <p><span class="author">Tác giả: <?php echo $result['author'] ?></span></p>
 				     <div class="button"><span><a href="detals.php?proid=<?php echo $result_new['productId']?>" class="details">Chi tiết sách</a></span></div>
 				</div>
 				<?php

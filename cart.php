@@ -25,7 +25,7 @@
  <div class="main">
     <div class="content">
     	<div class="cartoption">		
-			<div class=""> 
+			<div class="cartpage"> 
 			    	<h2>Giỏ hàng của bạn</h2>
 					<?php
 					if(isset($update_quantily_Cart)){
@@ -71,7 +71,7 @@
 									echo $total;
 									?>
 								</td>
-								<td><a href="?cartid=<?php echo $result['cartId'] ?>">Xóa</a></td>
+								<td><a onclick="return confirm('Bạn có chắc muốn xóa <?php echo $result['productName'] ?>?');" href="?cartid=<?php echo $result['cartId'] ?>">Xóa</a></td>
 							</tr>
 							<?php
 							$subtotal+= $total;

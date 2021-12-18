@@ -1396,7 +1396,7 @@ p.note{
   border-bottom: 1px solid #ddd;
   font-size: 30px;
   margin-bottom: 20px;
-  width: 141px;
+  width: 500px;
 }
 .tblone {
   border: 1px solid #fff;
@@ -1435,8 +1435,8 @@ table.tblone a {
 }
 table.tblone a:hover{color: #000;}
 table.tblone img {
-  height: 20px;
-  width: 30px;
+  height: 100px;
+  width: 100px;
 }
 .shopping {
   margin-top: 30px;

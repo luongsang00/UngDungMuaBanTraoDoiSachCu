@@ -110,6 +110,19 @@ include_once($filepath.'/../helpers/format.php');
 
             }
         }
+        public function getAmountPrice($customer_id){
+            
+            $query = "SELECT price FROM tbl_order WHERE customer_id ='$customer_id' ";
+            $get_price = $this->db->select($query);
+            return $get_price;
+
+        }
+        public function get_cart_ordered($customer_id)
+        {
+            $query = "SELECT * FROM tbl_order WHERE customer_id ='$customer_id' ";
+            $get_cart_ordered = $this->db->select($query);
+            return $get_cart_ordered;
+        }
     }
     
 ?>
