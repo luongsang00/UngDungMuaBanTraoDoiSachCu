@@ -2,26 +2,19 @@
 	include 'inc/header.php';
 	//include 'inc/slider.php';
 ?>
-<!-- <?php
-	// if(isset($_GET['cartid']) ){
-	// 	$cartid=$_GET['cartid'];
-	// 	$delBook= $ct->del_book_cart($cartid);
-	// }
-	// if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit'])){
-	// 	$cartId = $_POST['cartId'];	
-	// 	$quantily=$_POST['quantily'];
-	// 	$update_quantily_Cart= $ct->update_quantily_Cart($quantily,$cartId);
-	// 	if($quantily<=0){
-	// 		$delBook= $ct->del_book_cart($cartId);
-		
-	// 	}
-	// }
-?> -->
-<!-- <?php
-	if(!isset($_GET['id'])){
-		echo "<meta http-equiv='refresh' content='0; url=?id=live'>";
+<?php
+	$login_check=Session::get('customer_login');
+	if($login_check==false){
+	  header('location:login.php');
 	}
-?> -->
+	$ct= new cart();
+	if(isset($_GET['confirmid']) ){
+		$id=$_GET['confirmid'];
+		$time=$_GET['time'];
+		$price=$_GET['price'];
+		$shifted_confirm=$ct->shifted_confirm($id,$time,$price);
+	} 
+?>
  <div class="main">
     <div class="content">
     	<div class="cartoption">		
@@ -66,19 +59,26 @@
                                     <?php
                                         if($result['status']=='0'){
                                             echo 'Chờ duyệt';
+                                        }else if($result['status']=='1'){
+											echo "Đang vận chuyển";
                                         }else{
-                                            echo 'Đã duyệt';
-                                        }
+											echo "Đã nhận";
+										}
+										
                                     ?>
                                 </td>
 								<?php
                                 if($result['status']=='0'){ 
                                 ?>
-                                <td> <?php echo 'N/A' ?></td>
+                                	<td> <?php echo 'N/A' ?></td>
                                 <?php
+								}else if($result['status']=='1'){
+								?>
+									<td><a href="?confirmid=<?php echo $customer_id ?>&price=<?php echo $result['price'] ?>&time=<?php echo $result['date_order'] ?>">Nhận được</a></td>
+								<?php
                                 }else{
                                 ?>
-                                <td><a onclick="return confirm('Bạn có chắc muốn xóa <?php echo $result['productName'] ?>?');" href="?cartid=<?php echo $result['cartId'] ?>">Xóa</a></td>
+                                	<td>Đã nhận</td>
 								<?php
                                 }
                                 ?>

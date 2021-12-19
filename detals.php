@@ -4,7 +4,7 @@
 ?>
 <?php
 	if(!isset($_GET['proid']) || $_GET['proid']==null){
-		echo "<script>window.location='404.php'</script>";
+		 echo "<script>window.location='404.php'</script>";
 	}else{
 	$id=$_GET['proid'];
 	}
@@ -42,7 +42,7 @@
 						<div class="add-cart">
 							<form action="" method="post">
 								<input type="number" class="buyfield" name="quantily" value="1" min="1"/>
-								<input type="submit" class="buysubmit" name="submit" value="Buy Now"/>
+								<input type="submit" class="buysubmit" name="submit" value="Mua sách"/>
 							</form>	
 							<?php
 							if(isset($AddtoCart)){
@@ -50,11 +50,16 @@
 							}
 							?>			
 						</div>
+						<div class="add-cart">
+								<a class="buysubmit" href="?wlist=<?php echo $result_detail['productId'] ?>">Thêm vào sách yêu thích</a>	
+						</div>
 					</div>
 					<div class="product-desc">
 						<h2>CHI TIẾT SÁCH</h2>
 						<p><?php echo $result_detail['product_desc']?></p>
 					</div>
+
+					
 				
 				</div>
 				<?php

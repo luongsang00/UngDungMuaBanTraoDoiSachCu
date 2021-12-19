@@ -119,6 +119,17 @@ $product= new product();
 			echo '';
 		  }
 	  ?>
+
+	<?php 
+		$customer_id = Session::get('customer_id');
+	  $check_order = $ct->check_order($customer_id);
+		
+	  	if($check_order==true){
+			echo '<li><a href="orderdetails.php">Chi tiết đơn hàng</a></li>';
+		  }else{
+			echo '';
+		  }
+	  ?>
 	  
 	  <?php
 	  	$login_check=Session::get('customer_login');
@@ -128,7 +139,7 @@ $product= new product();
 			echo '<li><a href="profile.php">Tài khoản</a> </li>';
 		  }
 	  ?>
-	  <!-- <li><a href="contact.php">Contact</a> </li> -->
+	  <li><a href="contact.php">Liên hệ</a> </li>
 	  <div class="clear"></div>
 	</ul>
 </div>
