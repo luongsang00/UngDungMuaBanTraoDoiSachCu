@@ -8,10 +8,23 @@
 	}else{
 	$id=$_GET['proid'];
 	}
+	$customer_id=Session::get('customer_id');
+	if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['withlist'])){
+		
+		$productid=$_POST['productid'];
+		$insert_wlist= $product->insertWlishlist($productid,$customer_id);
+	}
+	
 	if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submit'])){
 		
 		$quantily=$_POST['quantily'];
-		$AddtoCart= $ct->add_to_cart($quantily,$id);
+		$insert_cart= $ct->add_to_cart($quantily,$id);
+	}
+	if(isset($_POST['binhluan_submit']))
+	{
+		$binhluan=$cs->insert_coment();
+		
+		
 	}
 
 ?>
@@ -35,7 +48,7 @@
 						<h2><?php echo $result_detail['productName'] ?></h2>
 						<p><?php echo $fm->textShorten( $result_detail['product_desc'],200) ?></p>					
 						<div class="price">
-							<p>Giá: <span><?php echo $result_detail['price']." "."VND" ?></span></p>
+							<p>Giá: <span><?php echo $fm->format_currency( $result_detail['price'])." "."VND" ?></span></p>
 							<p>Thể loại: <span><?php echo $result_detail['catName'] ?></span></p>
 							<p>NXB:<span><?php echo $result_detail['publishingName'] ?></span></p>
 						</div>
@@ -50,8 +63,26 @@
 							}
 							?>			
 						</div>
+						
 						<div class="add-cart">
-								<a class="buysubmit" href="?wlist=<?php echo $result_detail['productId'] ?>">Thêm vào sách yêu thích</a>	
+							<form action="" method="POST">
+							
+								<!-- <a class="buysubmit" href="?wlist=<?php echo $result_detail['productId'] ?>">Thêm vào sách yêu thích</a> -->
+								<input type="hidden" name="productid" value="<?php echo $result_detail['productId'] ?>"/>	
+								<?php 
+								$customer_id=Session::get('customer_id');
+								if($customer_id)
+								{
+								?>
+								<input type="submit" class="buysubmit" name="withlist" value="Sách yêu thích"/>
+								<?php
+								}?>
+								<?php 
+								if(isset($insert_wlist)){
+									echo $insert_wlist;
+								}
+								?>
+							</form>
 						</div>
 					</div>
 					<div class="product-desc">
@@ -82,6 +113,33 @@
  				</div>
  		</div>
  	</div>
+	 <!-- <div class="binhluan">
+		<div class="row">
+			<div class="col-md-8">
+				<h5>Ý kiến sản phẩm</h5>
+				<?php
+				if(isset($binhluan)){
+					echo $binhluan;
+				}?>
+				<form action="" method="post">
+				<p><input type="hidden" value="<?php echo $id ?>" name="product_id_binhluan"></p>
+				<p><input type="text" class="form-control" name="tennguoibinhluan" placeholder="Tên người bình luận"></p>
+				<p><textarea rows="5" style="resize: none;" class="form-control" name="binhluan" placeholder="Bình luận"></textarea></p>
+				<p><input type="submit" class="btn btn-success" value="Gửi bình luận" name="binhluan_submit" ></p>
+				</form>
+			</div>
+		</div>
+	 </div>
+	 <div>
+		 <?php
+		 $get_all_comment=$cs->get_all_comment();
+		 if($get_all_comment){
+			 while($result_comment=$get_all_comment->fetch_assoc()){
+		 ?>
+		 	<p><?php echo $result_comment['commnetName'] ?></p>
+			 <p><?php echo $result_comment['commne'] ?></p>
+		 <?php }}?>
+	 </div> -->
 </div>
 <?php
 include 'inc/footer.php';

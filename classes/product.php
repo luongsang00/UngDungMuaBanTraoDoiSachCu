@@ -230,7 +230,31 @@ include_once($filepath.'/../helpers/format.php');
             return $result;
         }
         public function getproduct_new(){
-            $query = "SELECT * FROM tbl_product order by productId desc LIMIT 4";
+            $sp_tungtrang=4;
+            if(!isset($_GET['trang'])){
+                $trang=1;
+            }else{
+                $trang=$_GET['trang'];
+            }
+            $tungtrang=($trang-1)*$sp_tungtrang;
+            $query = "SELECT * FROM tbl_product order by productId desc limit $tungtrang,$sp_tungtrang";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function getproduct_book(){
+            $sp_tungtrang=12;
+            if(!isset($_GET['trang'])){
+                $trang=1;
+            }else{
+                $trang=$_GET['trang'];
+            }
+            $tungtrang=($trang-1)*$sp_tungtrang;
+            $query = "SELECT * FROM tbl_product order by productId desc limit $tungtrang,$sp_tungtrang";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function get_all_product(){
+            $query = "SELECT * FROM tbl_product  ";
             $result = $this->db->select($query);
             return $result;
         }
@@ -262,6 +286,53 @@ include_once($filepath.'/../helpers/format.php');
         $query = "SELECT * FROM tbl_product Where publishingId='11' order by productId desc LIMIT 1 ";
         $result = $this->db->select($query);
         return $result;
+       }
+       public function insertWlishlist($productid,$customer_id){
+            $productid = $this->fm->validation($productid);
+            $customer_id= mysqli_real_escape_string($this->db->link, $customer_id);
+            
+
+            $check_wlist="SELECT * FROM tbl_wishlist where productId ='$productid' and customer_id='$customer_id'";
+            $result_check_wlist=$this->db->select($check_wlist);
+            
+            if($result_check_wlist){
+                $msg="<span class='error'>Sách đã được thêm vào mục yêu thích</span>";
+                return $msg;
+            }else{
+
+                $query= "SELECT * FROM tbl_product where productId ='$productid'";
+                $result = $this->db->select($query)->fetch_assoc();
+
+                $productName =$result['productName'];
+                $price=$result['price'];
+                $image=$result['image'];
+                    $query_insert = "INSERT INTO tbl_wishlist(productId, price, image, customer_id, productName ) VALUES('$productid', '$price', '$image','$customer_id','$productName')";
+                    $insert_wlist = $this->db->insert($query_insert);
+                    if($insert_wlist){
+                        $alert="<span class='success'>Thêm thành công</span>";
+                        return $alert;
+                    }else{
+                        $alert="<span class='error'>Thêm không thành công</span>";
+                        return $alert;
+                }
+            }
+
+       }
+       public function get_withlist($customer_id){
+        $query = "SELECT * FROM tbl_wishlist Where customer_id='$customer_id' order by id desc  ";
+        $result = $this->db->select($query);
+        return $result;
+       }
+       public function del_book_wishlist($proid,$customer_id){
+        $query = "DELETE FROM tbl_wishlist where productId = '$proid' and customer_id='$customer_id'";
+        $result = $this->db->delete($query);
+        return $result;
+       }
+       public function search_book($tukhoa){
+        $tukhoa = $this->fm->validation($tukhoa);
+        $query = "SELECT * FROM tbl_product Where productName like '%$tukhoa%'";
+            $result = $this->db->select($query);
+            return $result;
        }
 
     }

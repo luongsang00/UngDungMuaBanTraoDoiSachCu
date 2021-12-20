@@ -20,10 +20,10 @@
 				  while($result=$product_feathered->fetch_assoc()){
 			  ?>
 				<div class="grid_1_of_4 images_1_of_4">
-					 <a href="detals.php"><img src="admin/uploads/<?php echo $result['image'] ?>" alt="" /></a>
+					 <a href="detals.php?proid=<?php echo $result['productId']?>"><img src="admin/uploads/<?php echo $result['image'] ?>" alt="" /></a>
 					 <h2><?php $fm->textShorten($result['productName'],50) ?> </h2>
 					 <p><?php echo $fm->textShorten($result['product_desc'],50)  ?></p>
-					 <p><span class="price"><?php echo $result['price'].' '.'VND' ?></span></p>
+					 <p><span class="price"><?php echo $fm->format_currency( $result['price']).' '.'VND' ?></span></p>
 					 <p><span class="author">Tác giả: <?php echo $result['author'] ?></span></p>
 				     <div class="button"><span><a href="detals.php?proid=<?php echo $result['productId']?>" class="details">Chi tiết sách</a></span></div>
 				</div>
@@ -39,25 +39,37 @@
     		</div>
     		<div class="clear"></div>
     	</div>
-			<div class="section group">
-			<?php
+		<div class="section group">
+			  <?php
 			  $product_new=$product->getproduct_new();
 			  if($product_new){
-				  while($result_new=$product_new->fetch_assoc()){
+				  while($result=$product_new->fetch_assoc()){
 			  ?>
 				<div class="grid_1_of_4 images_1_of_4">
-					 <a href="detals.php"><img src="admin/uploads/<?php echo $result_new['image'] ?>" alt="" /></a>
-					 <h2><?php echo $fm->textShorten($result_new['productName'],50) ?> </h2>
-					 <p><?php echo $fm->textShorten($result_new['product_desc'],50)  ?></p>
-					 <p><span class="price"><?php echo $result_new['price'].' '.'VND' ?></span></p>
+					 <a href="detals.php?proid=<?php echo $result['productId']?>"><img src="admin/uploads/<?php echo $result['image'] ?>" alt="" /></a>
+					 <h2><?php $fm->textShorten($result['productName'],50) ?> </h2>
+					 <p><?php echo $fm->textShorten($result['product_desc'],50)  ?></p>
+					 <p><span class="price"><?php echo $fm->format_currency( $result['price']).' '.'VND' ?></span></p>
 					 <p><span class="author">Tác giả: <?php echo $result['author'] ?></span></p>
-				     <div class="button"><span><a href="detals.php?proid=<?php echo $result_new['productId']?>" class="details">Chi tiết sách</a></span></div>
+				     <div class="button"><span><a href="detals.php?proid=<?php echo $result['productId']?>" class="details">Chi tiết sách</a></span></div>
 				</div>
 				<?php
 			  }
 			}
 			  ?>
 				
+			</div>
+			<div class="">
+				<?php
+				$product_all=$product->get_all_product();
+				$product_count= mysqli_num_rows($product_all);
+				$product_button = $product_count/4;
+				$i=0;
+				echo '<p>Trang: </p>';
+				for($i=1;$i<=$product_button;$i++){
+					echo '<a style="margin:0 5px" href="index.php?trang='.$i.'">'.$i.'</a>';
+				}
+				?>
 			</div>
 			
     </div>

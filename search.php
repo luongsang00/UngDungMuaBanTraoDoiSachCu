@@ -1,28 +1,34 @@
+
 <?php
-	include 'inc/header.php';
-	include 'inc/slider.php';
-
+include 'inc/header.php';
+//include 'inc/slider.php';
 ?>
-
+<?php
+	
+	
+?>
  <div class="main">
-	 
     <div class="content">
+		<?php 
+			 if($_SERVER['REQUEST_METHOD']==='POST'){
+                $tukhoa = $_POST['tukhoa'];
+                $search_book= $product->search_book($tukhoa);
+                }
+			  ?>
     	<div class="content_top">
-    		
-    		<div class="clear"></div>
-    	</div>
-	      
-			<div class="content_bottom">
+			
     		<div class="heading">
-    		<h3>Sách mới </h3>
+    		<h3>Từ khóa tìm kiếm: <?php echo $tukhoa?> </h3>
     		</div>
+			
     		<div class="clear"></div>
+			
     	</div>
-		<div class="section group">
-			  <?php
-			  $product_new=$product->getproduct_book();
-			  if($product_new){
-				  while($result=$product_new->fetch_assoc()){
+
+	      <div class="section group">
+			  <?php 
+			 if($search_book){
+				 while($result=$search_book->fetch_assoc()){
 			  ?>
 				<div class="grid_1_of_41 images_1_of_41">
 					 <a href="preview-3.php"><img src="admin/uploads/<?php echo $result['image'] ?>  "  height="200px" alt="" /></a>
@@ -32,37 +38,27 @@
 				     <div class="button"><span><a href="detals.php?proid=<?php echo $result['productId']?>" class="details">Chi tiết Sách</a></span></div>
 				</div>
 				<?php
-			  }
+				}
+			}else{
+				echo "Chưa có sách";
 			}
-			  ?>
+			?>
+				
+				
 				
 			</div>
-			<div class="">
-				<?php
-				$product_all=$product->get_all_product();
-				$product_count= mysqli_num_rows($product_all);
-				$product_button = $product_count/12;
-				$i=0;
-				echo '<p>Trang: </p>';
-				for($i=1;$i<=$product_button;$i++){
-					echo '<a style="margin:0 5px" href="products.php?trang='.$i.'">'.$i.'</a>';
-				}
-				?>
-			</div>
-			
+
+	
+	
     </div>
  </div>
-
- <?php
-	include 'inc/footer.php';
+<?php
+ include 'inc/footer.php';
 
 ?>
 <style>
-	span.author {
-    font-size: 9px;
-	
-	}
-	.grid_1_of_41{
+    
+    .grid_1_of_41{
 	display: block;
 	float:left;
 	margin: 1% 0 1% 1%;
@@ -121,4 +117,6 @@
     .images_1_of_41 .button a.cart-button{
         padding:7px 5px 7px 38px; 
     }
+
+
 </style>

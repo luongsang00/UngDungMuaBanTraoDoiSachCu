@@ -57,7 +57,7 @@
 							<tr>
 								<td><?php echo $result['productName'] ?></td>
 								<td><img src="admin/uploads/<?php echo $result['image'] ?>" alt=""/></td>
-								<td><?php echo $result['price'] ?></td>
+								<td><?php echo $fm->format_currency( $result['price']).' '."VND" ?></td>
 								<td>
 									<form action="" method="post">
 										<input type="hidden" name="cartId"  value="<?php echo $result['cartId'] ?>"/>
@@ -68,7 +68,7 @@
 								<td>
 									<?php
 									$total=$result['price']*$result['quantily'];
-									echo $total;
+									echo $fm->format_currency( $total)." "."VND";
 									?>
 								</td>
 								<td><a onclick="return confirm('Bạn có chắc muốn xóa <?php echo $result['productName'] ?>?');" href="?cartid=<?php echo $result['cartId'] ?>">Xóa</a></td>
@@ -92,7 +92,7 @@
 								<td>
 									<?php
 									
-									echo $subtotal." "."VND";
+									echo $fm->format_currency( $subtotal)." "."VND";
 									Session::set('sum',$subtotal);
 									Session::set('qty',$qty);
 									?>

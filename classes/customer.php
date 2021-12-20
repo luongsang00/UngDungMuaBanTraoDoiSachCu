@@ -15,6 +15,34 @@ include_once($filepath.'/../helpers/format.php');
             $this->db = new Database();
             $this->fm = new Format();
         }
+		
+        public function insert_coment(){
+            $product_id=$_POST['product_id_binhluan'];
+            $tenbinhluan=$_POST['tennguoibinhluan'];
+            $binhluan=$_POST['binhluan'];
+            // echo $binhluan;
+            // echo $tenbinhluan;
+            if($tenbinhluan==""||$binhluan==""){
+                $alert = "<span class='error'>Các trường không được rỗng</span>";
+                return $alert;
+            }else{
+                $query = "INSERT INTO tbl_comment(commentName, comment,product_id) VALUES('$tenbinhluan', '$binhluan', '$product_id')";
+                $result = $this->db->insert($query);
+                if($result){
+                    $alert="<span class='success'>Bình luận thành công</span>";
+                    return $alert;
+                }else{
+                    $alert="<span class='error'>Bình luận không thành công</span>";
+                    return $alert;
+                }
+            }
+        }
+        public function get_all_comment(){
+            $product_id=$_POST['product_id_binhluan'];
+            $query = "SELECT * FROM tbl_comment where product_id= '$product_id' ";
+            $result = $this->db->select($query);
+            return $result;
+        }
         public function insert_customer($data){
             $name= mysqli_real_escape_string($this->db->link, $data['name']);
             $city= mysqli_real_escape_string($this->db->link, $data['city']);

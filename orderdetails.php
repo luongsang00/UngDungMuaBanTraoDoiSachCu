@@ -53,7 +53,7 @@
 								<td>
                                 <?php echo $result['quantily'] ?>
 								</td>
-                                <td><?php echo $result['price']." "."VND" ?></td>
+                                <td><?php echo $fm->format_currency( $result['price'])." "."VND" ?></td>
                                 <td><?php echo  $fm->formatDate( $result['date_order']) ?></td>
                                 <td>
                                     <?php

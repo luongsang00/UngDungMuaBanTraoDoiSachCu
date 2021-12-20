@@ -32,7 +32,7 @@
 				}
 			}
 			?>
-			<p class="order">Số tiền bạn đã mua sách ở website: <?php echo $amount ?> VND</p>
+			<p class="order">Số tiền bạn đã mua sách ở website: <?php echo $fm->format_currency( $amount) ?> VND</p>
 			<p class="order">Chúng tôi sẽ liên lạc với bạn sớm nhất có thể. Xem lại đơn hàng  <a href="orderdetails.php">tại đây</a></p>
         
  		</div>
